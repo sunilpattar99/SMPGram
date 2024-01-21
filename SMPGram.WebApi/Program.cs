@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SMPGram.Application;
 using SMPGram.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddCors(opt => {
         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
     });
 });
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(List.Handler).Assembly));
 
 
 var app = builder.Build();
